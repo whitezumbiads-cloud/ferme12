@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فيرم دوت أم الربيع | Ferme d'Hôtes Oum Rabia</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracotta:#C65D3A;
+    --sand:#E8D5B7;
+    --olive:#6B7C3F;
+    --clay:#A0522D;
+    --dark:#2A1810;
+    --cream:#F5EBE0;
+    --gold:#B8860B;
+  }
+  *{font-family:'Tajawal',sans-serif;}
+  .arabic-font{font-family:'Amiri',serif;}
+  .latin-font{font-family:'Playfair Display',serif;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--dark);}
+  
+  .hero-bg{
+    background-image:linear-gradient(rgba(42,24,16,0.5),rgba(42,24,16,0.7)),url('https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1920');
+    background-size:cover;background-position:center;
+  }
+  .texture-overlay{
+    background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C65D3A' fill-opacity='0.05'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20v40c11.046 0 20-8.954 20-20zm10 0c0 11.046 8.954 20 20 20V10c-11.046 0-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .moroccan-pattern{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='%23B8860B' fill-opacity='0.15'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .btn-primary{
+    background:var(--terracotta);color:white;padding:14px 32px;border-radius:50px;
+    transition:all 0.3s;display:inline-block;font-weight:500;
+    box-shadow:0 10px 30px rgba(198,93,58,0.4);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(198,93,58,0.6);}
+  
+  .section-title{
+    font-family:'Amiri',serif;font-weight:700;
+    color:var(--dark);position:relative;display:inline-block;
+  }
+  .section-title::after{
+    content:'';position:absolute;bottom:-15px;right:50%;transform:translateX(50%);
+    width:80px;height:3px;background:var(--terracotta);
+  }
+  
+  .card-hover{transition:all 0.4s ease;}
+  .card-hover:hover{transform:translateY(-10px);box-shadow:0 25px 50px rgba(0,0,0,0.15);}
+  
+  .arch-shape{
+    border-top-left-radius:50% 30%;border-top-right-radius:50% 30%;
+  }
+  
+  .nav-blur{backdrop-filter:blur(15px);background:rgba(245,235,224,0.85);}
+  
+  .gallery-item{
+    overflow:hidden;position:relative;
+  }
+  .gallery-item img{transition:transform 0.6s ease;}
+  .gallery-item:hover img{transform:scale(1.1);}
+  .gallery-item .overlay{
+    position:absolute;inset:0;background:linear-gradient(to top,rgba(42,24,16,0.9),transparent 60%);
+    display:flex;align-items:flex-end;padding:24px;opacity:0;transition:opacity 0.3s;
+  }
+  .gallery-item:hover .overlay{opacity:1;}
+  
+  .zone-card{
+    background:white;border-radius:24px;overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  }
+  
+  .divider-ornament{
+    display:flex;align-items:center;justify-content:center;gap:16px;color:var(--gold);
+  }
+  .divider-ornament::before,.divider-ornament::after{
+    content:'';height:1px;flex:1;max-width:80px;background:var(--gold);opacity:0.5;
+  }
+  
+  .fade-in{opacity:0;transform:translateY(30px);transition:all 0.8s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+  
+  .stat-num{
+    font-family:'Playfair Display',serif;font-weight:900;
+    background:linear-gradient(135deg,var(--terracotta),var(--gold));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  
+  .menu-link{position:relative;transition:color 0.3s;}
+  .menu-link::after{
+    content:'';position:absolute;bottom:-4px;right:0;width:0;height:2px;
+    background:var(--terracotta);transition:width 0.3s;
+  }
+  .menu-link:hover::after{width:100%;}
+  .menu-link:hover{color:var(--terracotta);}
+  
+  .hero-title{
+    text-shadow:0 4px 20px rgba(0,0,0,0.5);
+  }
+  
+  .lantern{
+    position:absolute;width:40px;height:60px;
+    background:radial-gradient(circle,#FFD700 0%,#FF8C00 100%);
+    border-radius:50% 50% 40% 40%;opacity:0.6;
+    animation:float 4s ease-in-out infinite;
+    filter:blur(2px);
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+  }
+  
+  .timeline-line{
+    background:linear-gradient(to bottom,transparent,var(--terracotta),transparent);
+  }
+  
+  .scroll-indicator{
+    animation:bounce 2s infinite;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 nav-blur shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#C65D3A] to-[#B8860B] flex items-center justify-center text-white font-bold text-xl arabic-font">ر</div>
+      <div>
+        <div class="arabic-font font-bold text-lg text-[#2A1810]">فيرم دوت أم الربيع</div>
+        <div class="text-xs text-[#6B7C3F]">Ferme Oum Rabia</div>
+      </div>
+    </div>
+    <div class="hidden lg:flex items-center gap-8 text-[#2A1810] font-medium">
+      <a href="#home" class="menu-link">الرئيسية</a>
+      <a href="#vision" class="menu-link">الرؤية</a>
+      <a href="#zones" class="menu-link">المناطق</a>
+      <a href="#gallery" class="menu-link">المعرض</a>
+      <a href="#experience" class="menu-link">التجربة</a>
+      <a href="#contact" class="menu-link">اتصل بنا</a>
+    </div>
+    <a href="#contact" class="btn-primary text-sm hidden md:inline-block">احجز زيارتك</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="home" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+  <div class="lantern" style="top:20%;left:10%;"></div>
+  <div class="lantern" style="top:30%;right:15%;animation-delay:1s;"></div>
+  <div class="lantern" style="top:60%;left:20%;animation-delay:2s;"></div>
+  
+  <div class="text-center text-white px-6 max-w-5xl relative z-10">
+    <div class="divider-ornament mb-6">
+      <span class="text-2xl">✦</span>
+    </div>
+    <p class="text-[#E8D5B7] tracking-[0.2em] lg:text-2xl font-bold mb-6 text-sm mb-4">سيدي عيسى • بني ملال • المغرب</p><br/>
+    <h1 class="arabic-font hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+      فيرم دوت أم الربيع
+    </h1>
+    <p class="latin-font text-2xl md:text-3xl text-[#E8D5B7] italic mb-8">Ferme d'Hôtes Oum Rabia</p>
+    <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto leading-relaxed">
+      وجهة ريفية فاخرة على ضفاف نهر أم الربيع<br/>
+      تجمع بين العمارة المغربية الأصيلة، فن الطهي، المنتجات المحلية وتجارب الطبيعة
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="#zones" class="btn-primary">اكتشف المشروع</a>
+      <a href="#vision" class="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-[#2A1810] transition">شاهد الرؤية</a>
+    </div>
+  </div>
+  
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white scroll-indicator">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  </div>
+</section>
+
+<!-- Stats Banner -->
+<section class="bg-[#2A1810] text-white py-12 moroccan-pattern">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div>
+      <div class="stat-num text-5xl md:text-6xl mb-2">5000</div>
+      <div class="text-[#E8D5B7]">متر مربع</div>
+    </div>
+    <div>
+      <div class="stat-num text-5xl md:text-6xl mb-2">50</div>
+      <div class="text-[#E8D5B7]">مقعد للضيوف</div>
+    </div>
+    <div>
+      <div class="stat-num text-5xl md:text-6xl mb-2">8</div>
+      <div class="text-[#E8D5B7]">مناطق متميزة</div>
+    </div>
+    <div>
+      <div class="stat-num text-5xl md:text-6xl mb-2">100%</div>
+      <div class="text-[#E8D5B7]">منتجات عضوية</div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision -->
+<section id="vision" class="py-24 texture-overlay">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-20">
+      <p class="text-[#C65D3A] tracking-widest text-sm mb-3">رؤيتنا</p>
+      <h2 class="section-title text-4xl md:text-5xl mb-6">وجهة فاخرة في قلب الطبيعة</h2>
+    </div>
+    
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-6">
+        <p class="text-lg leading-relaxed text-[#2A1810]">
+          نقدم لكم مشروعاً استثنائياً يجمع بين <strong class="text-[#C65D3A]">الطبيعة، فن الطهي، الزراعة، التراث المغربي والترفيه</strong> في وجهة ريفية فاخرة على ضفاف نهر أم الربيع.
+        </p>
+        <p class="text-lg leading-relaxed text-[#2A1810]">
+          مساحة 5000 متر مربع تطل مباشرة على النهر، تستقبل العائلات والسياح والزوار الباحثين عن تجربة أصيلة في قلب الطبيعة المغربية.
+        </p>
+        
+        <div class="grid grid-cols-2 gap-4 pt-6">
+          <div class="bg-white p-5 rounded-2xl shadow-md card-hover">
+            <div class="text-3xl mb-2">🌿</div>
+            <h4 class="font-bold mb-1">طبيعة خلابة</h4>
+            <p class="text-sm text-gray-600">إطلالة مباشرة على النهر</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl shadow-md card-hover">
+            <div class="text-3xl mb-2">🍽️</div>
+            <h4 class="font-bold mb-1">مطبخ أصيل</h4>
+            <p class="text-sm text-gray-600">نكهات مغربية تقليدية</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl shadow-md card-hover">
+            <div class="text-3xl mb-2">🏛️</div>
+            <h4 class="font-bold mb-1">عمارة تراثية</h4>
+            <p class="text-sm text-gray-600">لمسة معاصرة فاخرة</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl shadow-md card-hover">
+            <div class="text-3xl mb-2">👨‍👩‍👧</div>
+            <h4 class="font-bold mb-1">للعائلات</h4>
+            <p class="text-sm text-gray-600">أنشطة ترفيهية متنوعة</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600" class="rounded-3xl arch-shape w-full h-64 object-cover shadow-xl" alt="">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" class="rounded-3xl w-full h-48 object-cover shadow-xl" alt="">
+          </div>
+          <div class="space-y-4 mt-12">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600" class="rounded-3xl w-full h-48 object-cover shadow-xl" alt="">
+            <img src="https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?w=600" class="rounded-3xl arch-shape w-full h-64 object-cover shadow-xl" alt="">
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 bg-[#C65D3A] text-white p-6 rounded-2xl shadow-2xl hidden md:block">
+          <div class="arabic-font text-3xl font-bold">2025</div>
+          <div class="text-sm">إطلاق المشروع</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Architectural Style -->
+<section class="py-24 bg-[#F5EBE0]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-[#C65D3A] tracking-widest text-sm mb-3">الطراز المعماري</p>
+      <h2 class="section-title text-4xl md:text-5xl mb-6">عمارة مغربية بلمسة عصرية</h2>
+      <p class="max-w-2xl mx-auto text-gray-700 mt-8">عمارة ريفية مغربية تقليدية تمتزج مع لمسة معاصرة فاخرة، باستخدام مواد طبيعية محلية</p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#A0522D] flex items-center justify-center text-white text-2xl">🪨</div>
+        <h4 class="font-bold text-sm">الحجر الطبيعي</h4>
+      </div>
+      <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#6B7C3F] flex items-center justify-center text-white text-2xl">🪵</div>
+        <h4 class="font-bold text-sm">الخشب الطبيعي</h4>
+      </div>
+      <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#C65D3A] flex items-center justify-center text-white text-2xl">🏺</div>
+        <h4 class="font-bold text-sm">القرميد الطيني</h4>
+      </div>
+      <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#E8D5B7] flex items-center justify-center text-[#2A1810] text-2xl">✨</div>
+        <h4 class="font-bold text-sm">تادلاكت</h4>
+      </div>
+      <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#2A1810] flex items-center justify-center text-white text-2xl">⚙️</div>
+        <h4 class="font-bold text-sm">حديد مطروق</h4>
+      </div>
+      <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-[#B8860B] flex items-center justify-center text-white text-2xl">🎨</div>
+        <h4 class="font-bold text-sm">حرف يدوية</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Zones / Master Plan -->
+<section id="zones" class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-[#C65D3A] tracking-widest text-sm mb-3">المخطط العام</p>
+      <h2 class="section-title text-4xl md:text-5xl mb-6">ثماني مناطق متميزة</h2>
+      <p class="max-w-2xl mx-auto text-gray-700 mt-8">اكتشف مناطق المشروع المختلفة على مساحة 5000 متر مربع</p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" class="w-full h-full object-cover" alt="">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">300 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🍽️</span>
+            <h3 class="text-xl font-bold">المطعم الرئيسي</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">قاعة طعام داخلية لـ 20 شخص مع موقد تقليدي ومطبخ مفتوح وإطلالة على النهر</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">موقد تقليدي</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">مطبخ مفتوح</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" class="w-full h-full object-cover" alt="">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">250 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🌅</span>
+            <h3 class="text-xl font-bold">التراس البانورامي</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">30 مقعد خارجي مع برغولات خشبية ونوافير تقليدية وإطلالة على ضفاف النهر</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">برغولات</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">نوافير</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600" class="w-full h-full object-cover" alt="">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">100 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🍯</span>
+            <h3 class="text-xl font-bold">متجر المنتجات المحلية</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">العسل، زيت الزيتون، أملو، الأعشاب المحلية، الحلويات التقليدية والمنتجات العضوية</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">عسل</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">أملو</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">زيت زيتون</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" class="w-full h-full object-cover" alt="">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">1000 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🌴</span>
+            <h3 class="text-xl font-bold">الحديقة النهرية</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">أشجار النخيل والزيتون والحمضيات مع ممرات للمشي ومقاعد خشبية وإضاءة مصممة بعناية</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">نخيل</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">زيتون</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          
+          <img src="images/2020.png" class="w-full h-full object-cover" alt="Restaurant" width="100%">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">600 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🌱</span>
+            <h3 class="text-xl font-bold">المزرعة العضوية</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">حديقة خضروات وأعشاب عطرية مع ري تقليدي ومنطقة تعليمية زراعية</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">عضوي</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">تعليمي</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="111.jpeg" alt="Ferme Oum Rabia" width="100%">
+          <img src="images/2020.png" class="w-full h-full object-cover" alt="Restaurant">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">600 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🎠</span>
+            <h3 class="text-xl font-bold">منطقة الترفيه العائلي</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">ملعب للأطفال، مساحات للنزهات، مزرعة للحيوانات الأليفة وورش عمل في الهواء الطلق</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">للأطفال</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">حيوانات</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="images/111.jpeg"
+     class="w-full h-full object-cover"
+     alt="Restaurant">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">500 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">💍</span>
+            <h3 class="text-xl font-bold">منطقة المناسبات</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">مصممة لحفلات الزفاف والخطوبة والاحتفالات العائلية مع مسرح خارجي وإضاءة زخرفية</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">زفاف</span>
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">شركات</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover">
+        <div class="h-56 overflow-hidden relative">
+          <img src="2026.jpg" alt="Ferme Oum Rabia" width="100%">
+          <img src="images/2020.png"
+     class="w-full h-full object-cover"
+     alt="Restaurant">
+          <div class="absolute top-4 right-4 bg-[#C65D3A] text-white px-4 py-1 rounded-full text-sm">600 م²</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🚗</span>
+            <h3 class="text-xl font-bold">موقف السيارات</h3>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">سعة 25 مركبة مع وصول من طريق مزدوج المسار يخدم جميع زوار المشروع</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="bg-[#F5EBE0] px-3 py-1 rounded-full">25 مركبة</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="zone-card card-hover bg-gradient-to-br from-[#C65D3A] to-[#A0522D] text-white">
+        <div class="p-8 h-full flex flex-col justify-center text-center">
+          <div class="text-5xl mb-4">📐</div>
+          <h3 class="text-2xl font-bold mb-3 arabic-font">المساحة الإجمالية</h3>
+          <div class="stat-num text-6xl text-white mb-2" style="-webkit-text-fill-color:white;background:none;">5000</div>
+          <p class="text-[#F5EBE0]">متر مربع من الفخامة</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="py-24 bg-[#2A1810] text-white moroccan-pattern">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-[#E8D5B7] tracking-widest text-sm mb-3">معرض الصور</p>
+      <h2 class="arabic-font text-4xl md:text-5xl mb-6 font-bold">إلهامات بصرية</h2>
+      <div class="w-20 h-1 bg-[#C65D3A] mx-auto"></div>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="gallery-item rounded-2xl col-span-2 row-span-2">
+        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800" class="w-full h-full object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">المنظر الجوي</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">المدخل الرئيسي</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">المطعم الداخلي</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">التراس النهري</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">منظر الغروب</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">المتجر</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">حديقة المناسبات</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">المزرعة العضوية</h4></div>
+      </div>
+      <div class="gallery-item rounded-2xl">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400" class="w-full h-64 object-cover" alt="">
+        <div class="overlay"><h4 class="text-white font-bold">منظر ليلي</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-[#C65D3A] tracking-widest text-sm mb-3">التجربة</p>
+      <h2 class="section-title text-4xl md:text-5xl mb-6">إلهام من أفخم المنتجعات</h2>
+      <p class="max-w-2xl mx-auto text-gray-700 mt-8">تصميم منظر طبيعي بطراز منتجع بيئي فاخر مستوحى من أرقى الوجهات العالمية</p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+      <div class="bg-gradient-to-br from-[#F5EBE0] to-white p-8 rounded-3xl text-center card-hover border border-[#E8D5B7]">
+        <div class="latin-font text-2xl font-bold text-[#C65D3A] mb-2">Kasbah</div>
+        <div class="font-bold mb-1">Tamadot</div>
+        <div class="text-sm text-gray-600">المغرب</div>
+      </div>
+      <div class="bg-gradient-to-br from-[#F5EBE0] to-white p-8 rounded-3xl text-center card-hover border border-[#E8D5B7]">
+        <div class="latin-font text-2xl font-bold text-[#C65D3A] mb-2">Aman</div>
+        <div class="font-bold mb-1">Resorts</div>
+        <div class="text-sm text-gray-600">عالمي</div>
+      </div>
+      <div class="bg-gradient-to-br from-[#F5EBE0] to-white p-8 rounded-3xl text-center card-hover border border-[#E8D5B7]">
+        <div class="latin-font text-2xl font-bold text-[#C65D3A] mb-2">Six</div>
+        <div class="font-bold mb-1">Senses</div>
+        <div class="text-sm text-gray-600">منتجعات بيئية</div>
+      </div>
+      <div class="bg-gradient-to-br from-[#F5EBE0] to-white p-8 rounded-3xl text-center card-hover border border-[#E8D5B7]">
+        <div class="latin-font text-2xl font-bold text-[#C65D3A] mb-2">Banyan</div>
+        <div class="font-bold mb-1">Tree</div>
+        <div class="text-sm text-gray-600">آسيا</div>
+      </div>
+    </div>
+    
+    <!-- Target Market -->
+    <div class="text-center mb-12">
+      <h3 class="arabic-font text-3xl font-bold mb-4">جمهورنا المستهدف</h3>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="text-center p-4">
+        <div class="text-4xl mb-2">👨‍👩‍👧‍👦</div>
+        <div class="font-bold text-sm">العائلات</div>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-2">🌍</div>
+        <div class="font-bold text-sm">السياح</div>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-2">🗓️</div>
+        <div class="font-bold text-sm">زوار العطلات</div>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-2">🌳</div>
+        <div class="font-bold text-sm">عشاق الطبيعة</div>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-2">💼</div>
+        <div class="font-bold text-sm">الشركات</div>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-2">🎉</div>
+        <div class="font-bold text-sm">منظمو الفعاليات</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 bg-gradient-to-br from-[#C65D3A] via-[#A0522D] to-[#2A1810] text-white relative overflow-hidden">
+  <div class="absolute inset-0 moroccan-pattern opacity-30"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <div class="divider-ornament mb-6 text-white">
+      <span class="text-2xl">✦</span>
+    </div>
+    <h2 class="arabic-font text-4xl md:text-6xl font-bold mb-6">عش التجربة الفاخرة</h2>
+    <p class="text-xl text-[#F5EBE0] mb-10 leading-relaxed">
+      انضم إلينا في رحلة استكشاف وجهة استثنائية تجمع بين التراث المغربي الأصيل والفخامة العصرية
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="#contact" class="bg-white text-[#C65D3A] px-10 py-4 rounded-full font-bold hover:scale-105 transition shadow-2xl">احجز زيارتك الآن</a>
+      <a href="#zones" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-[#C65D3A] transition">تواصل معنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-24 bg-[#F5EBE0]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-[#C65D3A] tracking-widest text-sm mb-3">تواصل معنا</p>
+      <h2 class="section-title text-4xl md:text-5xl mb-6">نحن في انتظاركم</h2>
+    </div>
+    
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div class="space-y-6">
+        <div class="bg-white p-6 rounded-2xl shadow-md flex items-start gap-4 card-hover">
+          <div class="w-14 h-14 rounded-full bg-[#C65D3A] flex items-center justify-center text-white text-2xl shrink-0">📍</div>
+          <div>
+            <h4 class="font-bold mb-1">العنوان</h4>
+            <p class="text-gray-600">سيدي عيسى، بني ملال، المغرب<br/>على ضفاف نهر أم الربيع</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-md flex items-start gap-4 card-hover">
+          <div class="w-14 h-14 rounded-full bg-[#6B7C3F] flex items-center justify-center text-white text-2xl shrink-0">📞</div>
+          <div>
+            <h4 class="font-bold mb-1">الهاتف</h4>
+            <p class="text-gray-600">961 646 662 212+</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-md flex items-start gap-4 card-hover">
+          <div class="w-14 h-14 rounded-full bg-[#B8860B] flex items-center justify-center text-white text-2xl shrink-0">✉️</div>
+          <div>
+            <h4 class="font-bold mb-1">البريد الإلكتروني</h4>
+            <p class="text-gray-600">ferme_d'hote@gmail.com</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-md flex items-start gap-4 card-hover">
+          <div class="w-14 h-14 rounded-full bg-[#2A1810] flex items-center justify-center text-white text-2xl shrink-0">🕐</div>
+          <div>
+            <h4 class="font-bold mb-1">ساعات العمل</h4>
+            <p class="text-gray-600">يومياً من 08:00 صباحاً حتى 11:00 مساءً</p>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+<section id="contact" class="py-24">
+
+<div class="max-w-4xl mx-auto text-center px-6">
+
+<h3 class="text-4xl font-bold text-green-700 mb-8">
+Réservez votre séjour
+</h3>
+
+<p class="text-lg text-gray-600 mb-10">
+Remplissez le formulaire puis envoyez votre demande via WhatsApp.
+</p>
+
+<div class="grid gap-4 max-w-xl mx-auto">
+
+<input id="nom" type="text" placeholder="Nom complet"
+class="border p-3 rounded-lg">
+
+<input id="telephone" type="tel" placeholder="Téléphone"
+class="border p-3 rounded-lg">
+
+<input id="arrivee" type="date"
+class="border p-3 rounded-lg">
+
+<input id="depart" type="date"
+class="border p-3 rounded-lg">
+<select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#C65D3A] focus:border-transparent outline-none transition">
+            <option>نوع الخدمة</option>
+            <option>حجز مطعم</option>
+            <option>حفل زفاف</option>
+            <option>مناسبة عائلية</option>
+            <option>فعالية شركات</option>
+            <option>زيارة عادية</option>
+          </select>
+<input id="personnes" type="number" min="1"
+placeholder="Nombre de personnes"
+class="border p-3 rounded-lg">
+
+<textarea id="message"
+placeholder="Message complémentaire"
+class="border p-3 rounded-lg h-32"></textarea>
+
+<button onclick="envoyerWhatsApp()"
+class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-lg font-bold">
+WhatsApp Réservation
+</button>
+
+</div>
+
+<div class="mt-10 text-gray-600">
+<p>📞 961 646 662 212+</p>
+<p>📧 ferme_d'hote@gmail.com</p>
+<p>📍 Région de Béni Mellal-Khénifra - Maroc</p>
+</div>
+
+</div>
+
+</section>
+
+<script>
+function envoyerWhatsApp() {
+
+let nom = document.getElementById("nom").value;
+let telephone = document.getElementById("telephone").value;
+let arrivee = document.getElementById("arrivee").value;
+let depart = document.getElementById("depart").value;
+let personnes = document.getElementById("personnes").value;
+
+let message = document.getElementById("message").value;
+
+let texte =
+`Bonjour, je souhaite réserver un séjour à Ferme d'Hôtes Oum Rabia.
+
+Nom : ${nom}
+Téléphone : ${telephone}
+Date d'arrivée : ${arrivee}
+Date de départ : ${depart}
+Nombre de personnes : ${personnes}
+
+Message :
+${message}`;
+
+let url =
+`https://wa.me/212662646961?text=${encodeURIComponent(texte)}`;
+
+window.open(url, '_blank');
+}
+</script>
+
+</section>
+<!-- Footer -->
+<footer class="bg-[#2A1810] text-white py-12">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#C65D3A] to-[#B8860B] flex items-center justify-center text-white font-bold arabic-font">ر</div>
+          <div>
+            <div class="arabic-font font-bold">فيرم دوت أم الربيع</div>
+            <div class="text-xs text-[#E8D5B7]">Ferme Oum Rabia</div>
+          </div>
+        </div>
+        <p class="text-sm text-gray-400">وجهة ريفية فاخرة على ضفاف نهر أم الربيع في قلب المغرب</p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4 text-[#C65D3A]">روابط سريعة</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="#home" class="hover:text-[#C65D3A]">الرئيسية</a></li>
+          <li><a href="#vision" class="hover:text-[#C65D3A]">رؤيتنا</a></li>
+          <li><a href="#zones" class="hover:text-[#C65D3A]">المناطق</a></li>
+          <li><a href="#gallery" class="hover:text-[#C65D3A]">المعرض</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4 text-[#C65D3A]">خدماتنا</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li>المطعم التقليدي</li>
+          <li>متجر المنتجات المحلية</li>
+          <li>تنظيم المناسبات</li>
+          <li>أنشطة عائلية</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4 text-[#C65D3A]">تابعنا</h4>
+        <div class="flex gap-3">
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C65D3A] flex items-center justify-center transition">📷</a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C65D3A] flex items-center justify-center transition">📘</a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C65D3A] flex items-center justify-center transition">▶️</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 text-center text-sm text-gray-400">
+      © 2025 فيرم دوت أم الربيع - جميع الحقوق محفوظة | Ferme d'Hôtes Oum Rabia
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  },{threshold:0.1});
+  
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  
+  // Smooth scroll for nav
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
